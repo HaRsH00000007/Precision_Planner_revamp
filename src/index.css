@@ -1,0 +1,161 @@
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
+@import "@fontsource-variable/manrope";
+@import "tailwindcss";
+
+/* ───────────── Design tokens ───────────── */
+@theme {
+  /* Navy family comes straight from the PP monogram. */
+  --color-ink: #071428;
+  --color-ink-2: #0b1d38;
+  --color-navy: #0b2545;
+  --color-navy-2: #13315c;
+  --color-line: #1d3557;
+
+  --color-ivory: #f7f3ea;
+  --color-sand: #ede5d3;
+  --color-stone: #d9cfb9;
+
+  --color-gold: #c8a35a;
+  --color-gold-2: #e3c88f;
+  --color-gold-3: #9c7a36;
+
+  --color-mist: #9aa6ba;
+
+  --font-display: "Fraunces Variable", "Times New Roman", serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ───────────── Base ───────────── */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-ink text-ivory font-sans;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  img {
+    user-select: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+/* ───────────── Reusable utilities ───────────── */
+@utility container-x {
+  @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
+}
+
+/* Small uppercase label above headings: "— Services" */
+@utility eyebrow {
+  @apply inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.28em];
+  &::before {
+    content: "";
+    @apply block h-px w-8 bg-current opacity-60;
+  }
+}
+
+@utility h-section {
+  @apply font-display font-normal leading-[0.98];
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
+}
+
+@utility btn {
+  @apply relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-7 py-4 text-sm font-semibold tracking-wide transition-colors duration-300;
+}
+@utility btn-gold {
+  @apply btn bg-gold text-ink hover:bg-gold-2;
+}
+@utility btn-ghost-light {
+  @apply btn border border-ivory/25 text-ivory hover:border-gold hover:text-gold-2;
+}
+@utility btn-ink {
+  @apply btn bg-ink text-ivory hover:bg-navy-2;
+}
+
+@layer components {
+  /* Subtle film grain for dark sections. */
+  .grain::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* 3D flip card */
+  .flip-scene {
+    perspective: 1400px;
+  }
+  .flip-inner {
+    @apply relative h-full w-full;
+    transform-style: preserve-3d;
+  }
+  .flip-face {
+    @apply absolute inset-0 overflow-hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Lenis smooth-scroll helpers */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+/* Full scroll lock (mobile menu / preloader). A stopped Lenis alone keeps the scrollbar,
+   which the step-scrolling services carousel relies on to avoid a layout shift. */
+html.scroll-locked {
+  overflow: hidden;
+}
+
+/* SplitText line masks shouldn't clip descenders of the serif. */
+.split-line {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No pinned carousel: stack the service cards vertically instead. */
+  #services [data-pin] {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  #services [data-track] {
+    flex-direction: column !important;
+    width: auto !important;
+    padding-bottom: 7rem;
+  }
+  #services [data-panel] {
+    width: auto !important;
+  }
+  #services [data-pin] > .absolute {
+    display: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
