@@ -3,10 +3,10 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { gsap, SplitText, useGSAP, MOTION_OK } from "../lib/gsap.js";
 
 const DECK = [
-  { src: "/images/photo1.webp", title: "Keynote production", meta: "Conference stage", pos: "78% 50%" },
-  { src: "/images/work/genai-summit.webp", title: "The GenAI Summit", meta: "Ashoka Hotel, New Delhi" },
-  { src: "/images/services/stalls-1.webp", title: "Exhibition stalls", meta: "Designed & fabricated in-house" },
-  { src: "/images/work/cfo-100-awards.webp", title: "CFO 100 Awards", meta: "The Lalit, Mumbai" },
+  { src: "/images/hero/conference-stage.webp", title: "Stage & AV production", meta: "Conference ballroom", pos: "50% 50%" },
+  { src: "/images/hero/blue-heaven-arch.webp", title: "Blue Heaven Makeup Party", meta: "Brand activation", pos: "50% 45%" },
+  { src: "/images/hero/iha-2026-cube.webp", title: "India Hospitality Awards", meta: "New Delhi · 2026", pos: "50% 40%" },
+  { src: "/images/hero/blush-pod.webp", title: "Experiential installs", meta: "Built in-house", pos: "50% 55%" },
 ];
 
 const ROTATIONS = [0, -6, 5, -3];

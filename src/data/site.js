@@ -111,37 +111,64 @@ export const PROCESS = [
 export const WORK_FILTERS = [
   { id: "all", label: "All work" },
   { id: "summit", label: "Summits & Conferences" },
-  { id: "awards", label: "Awards & Launches" },
-  { id: "forum", label: "Forums & Expos" },
+  { id: "awards", label: "Awards & Recognition" },
+  { id: "activation", label: "Brand Activations" },
 ];
 
-const w = (slug, title, venue, city, category) => ({
+// `venue` is optional — when it's unknown the card back shows `scope` (what we delivered) instead.
+const w = ({ slug, back = `${slug}-2`, pos, ...rest }) => ({
   slug,
-  title,
-  venue,
-  city,
-  category,
+  ...rest,
+  pos,
   image: `/images/work/${slug}.webp`,
-  imageBack: `/images/work/${slug}-2.webp`,
+  imageBack: `/images/work/${back}.webp`,
 });
 
 export const WORKS = [
-  w("genai-summit", "The GenAI Summit", "Ashoka Hotel", "New Delhi", "summit"),
-  w("cfo-engage-bengaluru", "CFO Engage", "The Leela Palace", "Bengaluru", "summit"),
-  w("ideaforge-ipo", "IdeaForge IPO Event", "Taj Lands End", "Mumbai", "awards"),
-  w("cvf-off-highway", "CVF Off Highway", "The Eros Hotel", "New Delhi", "forum"),
-  w("wire-summit", "Wire Summit — Blockchain", "Aloft Aerocity", "New Delhi", "summit"),
-  w("cfo-100-awards", "CFO 100 Awards", "The Lalit", "Mumbai", "awards"),
-  w("two-wheeler-forum", "Two Wheeler Forum", "Yashobhoomi IICC", "New Delhi", "forum"),
-  w("esg-pdc", "ESG Professional Development Conference", "Radisson Blu, Dwarka", "New Delhi", "summit"),
-  w("cfo-next-100", "CFO Next 100", "Holiday Inn Aerocity", "New Delhi", "awards"),
-  w("animal-health-summit", "India Animal Health Summit", "Holiday Inn Aerocity", "New Delhi", "summit"),
-  w("passenger-vehicle-forum", "Passenger Vehicle Forum", "Hyatt Regency", "Pune", "forum"),
-  w("masters-india", "Masters India Finance Leaders Summit", "Roseate House Aerocity", "New Delhi", "summit"),
-  w("asian-education-awards", "Asian Education Awards", "Hyatt Regency", "Manesar", "awards"),
-  w("india-startup-conclave", "India Startup Conclave", "Radisson Blu Hotel", "New Delhi", "summit"),
-  w("commercial-vehicle-forum", "Commercial Vehicle Forum", "JW Marriott", "Pune", "forum"),
-  w("cfo-engage-hyderabad", "CFO Engage", "The Westin", "Hyderabad", "summit"),
+  w({
+    slug: "brand-india-summit",
+    title: "Brand India Summit",
+    venue: "Hyatt Centric",
+    city: "New Delhi",
+    category: "summit",
+    scope: "Stage, panel set, registration & print",
+  }),
+  w({
+    slug: "iha-2026",
+    title: "India Hospitality Awards 2026",
+    city: "New Delhi",
+    category: "awards",
+    scope: "Legacy wall, 3D cube installation & branding",
+    pos: "50% 40%",
+  }),
+  w({
+    slug: "global-csr-esg-awards",
+    title: "Global CSR & ESG Awards",
+    category: "awards",
+    scope: "Curved LED stage, set & step-and-repeat",
+  }),
+  w({
+    slug: "blue-heaven-makeup-party",
+    title: "Blue Heaven Makeup Party",
+    category: "activation",
+    scope: "Neon arch entry, blush pods & bar counter",
+    pos: "50% 28%",
+  }),
+  w({
+    slug: "indian-csr-awards",
+    back: "indian-csr-awards",
+    title: "Indian CSR Awards",
+    category: "awards",
+    scope: "Stage design, LED backdrop & seating",
+    pos: "50% 62%",
+  }),
+  w({
+    slug: "swiss-beauty-craze",
+    title: "Swiss Beauty Craze",
+    category: "activation",
+    scope: "Custom stall fabrication & photo-op arch",
+    pos: "50% 45%",
+  }),
 ];
 
 export const VENUES = [

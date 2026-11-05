@@ -63,15 +63,16 @@ export default function WhyUs() {
           </p>
         </div>
 
-        <div data-why-frame className="relative mt-16 aspect-[16/9] overflow-hidden rounded-[28px] bg-navy sm:aspect-[21/9]">
+        <div data-why-frame className="relative mt-16 aspect-[4/3] overflow-hidden rounded-[28px] bg-navy sm:aspect-[21/9]">
           <img
             data-why-img
-            src="/images/work/cfo-engage-bengaluru.webp"
-            alt="CFO Engage at The Leela Palace, Bengaluru, produced by Precision Planners"
+            src="/images/crew-registration.webp"
+            alt="Precision Planners crew at the Brand India Summit registration desk, Hyatt Centric, New Delhi"
             loading="lazy"
             className="h-full w-full object-cover"
+            style={{ objectPosition: "60% 38%" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent sm:bg-gradient-to-r sm:from-ink/80 sm:via-ink/20" />
           <p className="absolute bottom-6 left-6 max-w-md font-display text-2xl italic leading-snug text-ivory sm:bottom-10 sm:left-10 sm:text-4xl">
             From stage build to show call — run by our own crew.
           </p>

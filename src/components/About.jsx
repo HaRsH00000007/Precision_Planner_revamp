@@ -92,8 +92,8 @@ export default function About() {
             <div data-about-frame className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-navy">
               <img
                 data-about-img
-                src="/images/photo2.webp"
-                alt="A Precision Planners conference in progress"
+                src="/images/about-stage.webp"
+                alt="Global CSR & ESG Awards stage produced by Precision Planners"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />

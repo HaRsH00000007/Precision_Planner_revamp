@@ -28,11 +28,17 @@ function WorkCard({ work }) {
         onClick={() => !canHover() && turn(!flipped.current)}
         onFocus={() => canHover() && turn(true)}
         onBlur={() => canHover() && turn(false)}
-        aria-label={`${work.title}, ${work.venue}, ${work.city}`}
+        aria-label={[work.title, work.venue, work.city].filter(Boolean).join(", ")}
       >
         {/* Front */}
         <div className="flip-face rounded-[22px] bg-navy">
-          <img src={work.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <img
+            src={work.image}
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: work.pos ?? "50% 50%" }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
           <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink">
             {CATEGORY_LABEL[work.category]}
@@ -45,9 +51,11 @@ function WorkCard({ work }) {
           </span>
           <div className="absolute inset-x-5 bottom-5 text-ivory">
             <h3 className="font-display text-2xl leading-tight lg:text-xl">{work.title}</h3>
-            <p className="mt-1 flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-ivory/70">
-              <MapPin className="h-3.5 w-3.5" /> {work.city}
-            </p>
+            {work.city && (
+              <p className="mt-1 flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-ivory/70">
+                <MapPin className="h-3.5 w-3.5" /> {work.city}
+              </p>
+            )}
           </div>
         </div>
 
@@ -57,9 +65,9 @@ function WorkCard({ work }) {
           <div className="absolute inset-0 flex flex-col justify-between p-6 text-ivory">
             <img src="/images/monogram-gold.png" alt="" className="h-8 w-auto self-start" />
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-2">Venue</p>
-              <p className="mt-1 font-display text-2xl leading-tight lg:text-xl">{work.venue}</p>
-              <p className="mt-1 text-sm text-ivory/70">{work.city}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-2">{work.venue ? "Venue" : "What we delivered"}</p>
+              <p className="mt-1 font-display text-2xl leading-tight lg:text-xl">{work.venue ?? work.scope}</p>
+              {work.city && <p className="mt-1 text-sm text-ivory/70">{work.city}</p>}
               <div className="mt-4 h-px w-full bg-ivory/15" />
               <p className="mt-3 text-sm font-semibold">{work.title}</p>
             </div>
@@ -129,7 +137,7 @@ export default function Work() {
             </h2>
           </div>
           <p className="max-w-sm text-base leading-relaxed text-ink/65" data-reveal>
-            A selection of summits, award nights and forums we've produced across India. Hover — or tap — a card to flip it.
+            A selection of summits, award nights and brand activations we've produced. Hover — or tap — a card to flip it.
           </p>
         </div>
 
@@ -150,7 +158,7 @@ export default function Work() {
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:gap-6">
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-6">
           {WORKS.map((w) => (
             <WorkCard key={w.slug} work={w} />
           ))}
